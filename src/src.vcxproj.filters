@@ -13,6 +13,7 @@
     <ClInclude Include="DiscordWrapper.hpp" />
     <ClInclude Include="CRC32.hpp" />
     <ClInclude Include="ITunesWrapper.hpp" />
+    <ClInclude Include="Xor.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ThirdParty">

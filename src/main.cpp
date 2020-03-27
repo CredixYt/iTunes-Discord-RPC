@@ -4,7 +4,7 @@
 #include <thread>
 #include <chrono>
 
-#include <iostream>
+#include "Xor.hpp"
 
 bool bShouldRun;
 std::thread UpdateThread;
@@ -17,7 +17,7 @@ void Update();
 void Event();
 
 int main() {
-	printf("Quit: Ctrl + Alt + Backspace\n");
+	printf(Xor("Quit: Ctrl + Alt + Backspace\n"));
 	bShouldRun = true;
 
 	EventThread = std::thread(Event);
@@ -57,6 +57,6 @@ void Update() {
 void Event() {
 	while (!(GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_MENU) && GetAsyncKeyState(VK_BACK)));
 
-	printf("Quitting...\n");
+	printf(Xor("Quitting...\n"));
 	bShouldRun = false;
 }

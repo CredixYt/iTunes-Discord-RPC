@@ -1,5 +1,6 @@
 #include "DiscordWrapper.hpp"
 #include "CRC32.hpp"
+#include "Xor.hpp"
 
 // Defines memset()
 #include <string.h>
@@ -15,7 +16,7 @@ void DiscordWrapper::Init() {
 	EventHandlers.disconnected = OnDisconnected;
 	EventHandlers.errored = OnError;
 
-	Discord_Initialize("693101484845563925", &EventHandlers, 1, NULL);
+	Discord_Initialize(Xor("693101484845563925"), &EventHandlers, 1, NULL);
 }
 
 void DiscordWrapper::Quit() {
@@ -35,15 +36,15 @@ void DiscordWrapper::UpdatePresence(std::string strTitle, std::string strAlbum, 
 	const char* szArtist = strArtist.c_str();
 
 	char szArtistFormatted[64] = { 0 };
-	sprintf_s(szArtistFormatted, "by %s", szArtist);
+	sprintf_s(szArtistFormatted, Xor("by %s"), szArtist);
 
 	char szAlbumHash[64] = { 0 };
 	uint32_t nAlbumHash = CRC32((unsigned char*)szAlbum, strlen(szAlbum));
-	sprintf_s(szAlbumHash, "%x", nAlbumHash);
+	sprintf_s(szAlbumHash, Xor("%x"), nAlbumHash);
 
 	char szArtistHash[64] = { 0 };
 	uint32_t nArtistHash = CRC32((unsigned char*)szAlbum, strlen(szAlbum));
-	sprintf_s(szArtistHash, "%x", szArtistHash);
+	sprintf_s(szArtistHash, Xor("%x"), szArtistHash);
 
 	using namespace std::chrono;
 	long lCurrentEpochTime = duration_cast<seconds>(system_clock::now().time_since_epoch()).count();
@@ -60,15 +61,15 @@ void DiscordWrapper::UpdatePresence(std::string strTitle, std::string strAlbum, 
 }
 
 void DiscordWrapper::OnReady(const DiscordUser* pConnectedUser) {
-	printf("Ready! Connected user: %s#%s (%s)\n", pConnectedUser->username, pConnectedUser->discriminator, pConnectedUser->userId);
+	printf(Xor("Ready! Connected user: %s#%s (%s)\n"), pConnectedUser->username, pConnectedUser->discriminator, pConnectedUser->userId);
 }
 
 void DiscordWrapper::OnDisconnected(int nErrorCode, const char* szMessage) {
-	printf("Disconnected! Error %i: %s\n", nErrorCode, szMessage);
+	printf(Xor("Disconnected! Error %i: %s\n"), nErrorCode, szMessage);
 }
 
 void DiscordWrapper::OnError(int nErrorCode, const char* szMessage) {
-	printf("Error! Error %i: %s\n", nErrorCode, szMessage);
+	printf(Xor("Error! Error %i: %s\n"), nErrorCode, szMessage);
 }
 
 DiscordWrapper* g_pDiscordWrapper = new DiscordWrapper();
