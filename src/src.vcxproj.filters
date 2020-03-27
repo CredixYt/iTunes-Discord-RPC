@@ -4,9 +4,19 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DiscordWrapper.cpp" />
     <ClCompile Include="CRC32.cpp" />
+    <ClCompile Include="iTunesCOMInterface_i.c">
+      <Filter>ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="ITunesWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DiscordWrapper.hpp" />
     <ClInclude Include="CRC32.hpp" />
+    <ClInclude Include="ITunesWrapper.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{7905d530-8c1c-4e71-a38e-97954af8a032}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -7,6 +7,8 @@
 
 #include "discord_rpc.h"
 
+#include <string>
+
 class DiscordWrapper {
 public:
 	// Initializes the DiscordRPC library and sets the handler functions
@@ -17,7 +19,7 @@ public:
 
 	void RunCallbacks();
 
-	void UpdatePresence(const char* szTitle, const char* szAlbum, const char* szArtist);
+	void UpdatePresence(std::string strTitle, std::string strAlbum, std::string strArtist, long lPlayerTime);
 private:
 	// Handlers
 	static void OnReady(const DiscordUser* pConnectedUser);

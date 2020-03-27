@@ -160,11 +160,14 @@
   <ItemGroup>
     <ClCompile Include="CRC32.cpp" />
     <ClCompile Include="DiscordWrapper.cpp" />
+    <ClCompile Include="iTunesCOMInterface_i.c" />
+    <ClCompile Include="ITunesWrapper.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CRC32.hpp" />
     <ClInclude Include="DiscordWrapper.hpp" />
+    <ClInclude Include="ITunesWrapper.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

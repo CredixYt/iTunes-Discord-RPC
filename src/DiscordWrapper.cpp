@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include <stdio.h>
+#include <chrono>
 
 void DiscordWrapper::Init() {
 	DiscordEventHandlers EventHandlers;
@@ -25,9 +26,13 @@ void DiscordWrapper::RunCallbacks() {
 	Discord_RunCallbacks();
 }
 
-void DiscordWrapper::UpdatePresence(const char* szTitle, const char* szAlbum, const char* szArtist) {
+void DiscordWrapper::UpdatePresence(std::string strTitle, std::string strAlbum, std::string strArtist, long lPlayerTime) {
 	DiscordRichPresence RichPresence;
 	memset(&RichPresence, 0, sizeof(DiscordRichPresence));
+
+	const char* szTitle = strTitle.c_str();
+	const char* szAlbum = strAlbum.c_str();
+	const char* szArtist = strArtist.c_str();
 
 	char szArtistFormatted[64] = { 0 };
 	sprintf_s(szArtistFormatted, "by %s", szArtist);
@@ -40,12 +45,16 @@ void DiscordWrapper::UpdatePresence(const char* szTitle, const char* szAlbum, co
 	uint32_t nArtistHash = CRC32((unsigned char*)szAlbum, strlen(szAlbum));
 	sprintf_s(szArtistHash, "%x", szArtistHash);
 
+	using namespace std::chrono;
+	long lCurrentEpochTime = duration_cast<seconds>(system_clock::now().time_since_epoch()).count();
+
 	RichPresence.details = szTitle;
 	RichPresence.state = szArtistFormatted;
 	RichPresence.largeImageKey = szAlbumHash;
 	RichPresence.largeImageText = szAlbum;
-	RichPresence.smallImageKey = szArtistHash;
-	RichPresence.smallImageText = szArtist;
+	/*RichPresence.smallImageKey = szArtistHash;
+	RichPresence.smallImageText = szArtist;*/
+	RichPresence.startTimestamp = lCurrentEpochTime - lPlayerTime;
 
 	Discord_UpdatePresence(&RichPresence);
 }

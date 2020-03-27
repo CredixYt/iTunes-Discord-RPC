@@ -1,10 +1,10 @@
 #include "DiscordWrapper.hpp"
-
-#include <stdio.h>
-#include <Windows.h>
+#include "ITunesWrapper.hpp"
 
 #include <thread>
 #include <chrono>
+
+#include <iostream>
 
 bool bShouldRun;
 std::thread UpdateThread;
@@ -31,18 +31,27 @@ int main() {
 
 void Update() {
 	g_pDiscordWrapper->Init();
+	g_pITunesWrapper->Init();
 
 	while (bShouldRun) {
 		g_pDiscordWrapper->RunCallbacks();
 		
-		if (true) {
-			g_pDiscordWrapper->UpdatePresence("Title", "Album", "Artist");
+		if (g_pITunesWrapper->GetPlayerState() == PlayerStatePlaying) {
+			g_pITunesWrapper->FetchCurrentTrack();
+
+			std::string strTitle = g_pITunesWrapper->GetTitle();
+			std::string strAlbum = g_pITunesWrapper->GetAlbum();
+			std::string strArtist = g_pITunesWrapper->GetArtist();
+			long lPlayerTime = g_pITunesWrapper->GetPlayerTime();
+
+			g_pDiscordWrapper->UpdatePresence(strTitle, strAlbum, strArtist, lPlayerTime);
 		}
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 	}
 
 	g_pDiscordWrapper->Quit();
+	g_pITunesWrapper->Quit();
 }
 
 void Event() {
