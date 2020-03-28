@@ -9,18 +9,30 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Debug-NoConsole|x64 = Debug-NoConsole|x64
+		Debug-NoConsole|x86 = Debug-NoConsole|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+		Release-NoConsole|x64 = Release-NoConsole|x64
+		Release-NoConsole|x86 = Release-NoConsole|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{760B19DB-BE37-40EF-9472-08590E16C71B}.Debug|x64.ActiveCfg = Debug|x64
 		{760B19DB-BE37-40EF-9472-08590E16C71B}.Debug|x64.Build.0 = Debug|x64
 		{760B19DB-BE37-40EF-9472-08590E16C71B}.Debug|x86.ActiveCfg = Debug|Win32
 		{760B19DB-BE37-40EF-9472-08590E16C71B}.Debug|x86.Build.0 = Debug|Win32
+		{760B19DB-BE37-40EF-9472-08590E16C71B}.Debug-NoConsole|x64.ActiveCfg = Debug-NoConsole|x64
+		{760B19DB-BE37-40EF-9472-08590E16C71B}.Debug-NoConsole|x64.Build.0 = Debug-NoConsole|x64
+		{760B19DB-BE37-40EF-9472-08590E16C71B}.Debug-NoConsole|x86.ActiveCfg = Debug-NoConsole|Win32
+		{760B19DB-BE37-40EF-9472-08590E16C71B}.Debug-NoConsole|x86.Build.0 = Debug-NoConsole|Win32
 		{760B19DB-BE37-40EF-9472-08590E16C71B}.Release|x64.ActiveCfg = Release|x64
 		{760B19DB-BE37-40EF-9472-08590E16C71B}.Release|x64.Build.0 = Release|x64
 		{760B19DB-BE37-40EF-9472-08590E16C71B}.Release|x86.ActiveCfg = Release|Win32
 		{760B19DB-BE37-40EF-9472-08590E16C71B}.Release|x86.Build.0 = Release|Win32
+		{760B19DB-BE37-40EF-9472-08590E16C71B}.Release-NoConsole|x64.ActiveCfg = Release-NoConsole|x64
+		{760B19DB-BE37-40EF-9472-08590E16C71B}.Release-NoConsole|x64.Build.0 = Release-NoConsole|x64
+		{760B19DB-BE37-40EF-9472-08590E16C71B}.Release-NoConsole|x86.ActiveCfg = Release-NoConsole|Win32
+		{760B19DB-BE37-40EF-9472-08590E16C71B}.Release-NoConsole|x86.Build.0 = Release-NoConsole|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

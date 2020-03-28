@@ -57,6 +57,8 @@ void DiscordWrapper::UpdatePresence(std::string strTitle, std::string strAlbum, 
 	RichPresence.smallImageText = szArtist;*/
 	RichPresence.startTimestamp = lCurrentEpochTime - lPlayerTime;
 
+	printf(Xor("%s\n"), szAlbumHash);
+
 	Discord_UpdatePresence(&RichPresence);
 }
 

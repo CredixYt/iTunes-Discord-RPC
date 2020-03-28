@@ -16,6 +16,20 @@ void Update();
 // Listens for quit keyboard shortcut and sets bShouldRun accordingly
 void Event();
 
+#ifdef NO_CONSOLE
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
+	printf(Xor("Quit: Ctrl + Alt + Backspace\n"));
+	bShouldRun = true;
+
+	EventThread = std::thread(Event);
+	UpdateThread = std::thread(Update);
+
+	EventThread.join();
+	UpdateThread.join();
+
+	return 0;
+}
+#else
 int main() {
 	printf(Xor("Quit: Ctrl + Alt + Backspace\n"));
 	bShouldRun = true;
@@ -28,6 +42,7 @@ int main() {
 
 	return 0;
 }
+#endif
 
 void Update() {
 	g_pDiscordWrapper->Init();
