@@ -20,6 +20,7 @@ public:
 	void RunCallbacks();
 
 	void UpdatePresence(std::string strTitle, std::string strAlbum, std::string strArtist, long lPlayerTime);
+	void ClearPresence();
 private:
 	// Handlers
 	static void OnReady(const DiscordUser* pConnectedUser);

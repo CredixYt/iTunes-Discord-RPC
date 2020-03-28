@@ -49,17 +49,30 @@ void DiscordWrapper::UpdatePresence(std::string strTitle, std::string strAlbum, 
 	using namespace std::chrono;
 	long lCurrentEpochTime = duration_cast<seconds>(system_clock::now().time_since_epoch()).count();
 
-	RichPresence.details = szTitle;
-	RichPresence.state = szArtistFormatted;
-	RichPresence.largeImageKey = szAlbumHash;
-	RichPresence.largeImageText = szAlbum;
+	if (strTitle.length() > 0)
+		RichPresence.details = szTitle;
+
+	if (strArtist.length() > 0)
+		RichPresence.state = szArtistFormatted;
+
+	if (strAlbum.length() > 0) {
+		RichPresence.largeImageKey = szAlbumHash;
+		RichPresence.largeImageText = szAlbum;
+	}
+
+	if (lPlayerTime >= 0)
+		RichPresence.startTimestamp = lCurrentEpochTime - lPlayerTime;
+
 	/*RichPresence.smallImageKey = szArtistHash;
 	RichPresence.smallImageText = szArtist;*/
-	RichPresence.startTimestamp = lCurrentEpochTime - lPlayerTime;
 
 	printf(Xor("%s\n"), szAlbumHash);
 
 	Discord_UpdatePresence(&RichPresence);
+}
+
+void DiscordWrapper::ClearPresence() {
+	Discord_ClearPresence();
 }
 
 void DiscordWrapper::OnReady(const DiscordUser* pConnectedUser) {

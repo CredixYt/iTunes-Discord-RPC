@@ -61,9 +61,14 @@ void Update() {
 
 			g_pDiscordWrapper->UpdatePresence(strTitle, strAlbum, strArtist, lPlayerTime);
 		}
+		else {
+			g_pDiscordWrapper->UpdatePresence(Xor("Paused"), Xor(""), Xor(""), -1);
+		}
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 	}
+
+	g_pDiscordWrapper->ClearPresence();
 
 	g_pDiscordWrapper->Quit();
 	g_pITunesWrapper->Quit();
